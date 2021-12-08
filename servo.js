@@ -1,13 +1,43 @@
-var five = require("johnny-five");
-var board = new five.Board();
+const express = require('express');
+const { Board, Servo } = require("johnny-five");
+const keypress = require("keypress");
 
-board.on("ready", function () {
-  var servo = new five.Servo({
-    pin: "06",
-    type: "continuous"
+keypress(process.stdin);
+
+const board = new Board();
+
+board.on("ready", () => {
+
+  console.log("Use Up and Down arrows for CW and CCW respectively. Space to stop.");
+
+  const servo = new Servo.Continuous(10);
+  const app = express();
+
+  process.stdin.resume();
+  process.stdin.setEncoding("utf8");
+  process.stdin.setRawMode(true);
+
+  process.stdin.on("keypress", (ch, key) => {
+
+    if (!key) {
+      return;
+    }
+
+    if (key.name === "q") {
+      console.log("Quitting");
+      process.exit();
+    } else if (key.name === "up") {
+      console.log("CW");
+      servo.cw();
+    } else if (key.name === "down") {
+      console.log("CCW");
+      servo.ccw();
+    } else if (key.name === "space") {
+      console.log("Stopping");
+      servo.stop();
+    }
   });
-
-  new five.Sensor("I0").scale(0, 1).on("change", function () {
-    servo.cw(this.value);
+  app.listen(3000, function () { // Ligue o servidor web na porta 3000
+    console.log("Servidor em http://localhost:3000!");
   });
 });
