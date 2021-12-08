@@ -20,4 +20,23 @@ $(document).ready(function() {
             });
         }
     });
+    $(document).on('click', '#pin14', function() {
+        var $btn = $(this);
+        if ($btn.hasClass('up')) {
+            $.get( "/key/up")
+        }
+    });
+    $(document).on('click', '#pin15', function() {
+        var $btn = $(this);
+       if ($btn.hasClass('down')) {
+            $.get( "/key/down")
+        }
+    });
+    $(document).on('click', '#pin16', function() {
+     var $btn = $(this);
+     if ($btn.hasClass('stop')) {
+        $.get( "/key/stop")
+    }
+    });
+
 });

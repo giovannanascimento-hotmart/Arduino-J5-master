@@ -1,10 +1,13 @@
 var express = require('express'); // Carregue a biblioteca que usaremos para configurar um servidor web básico
 var five = require("johnny-five"); // Carregue a biblioteca node que nos permite comunicar com o Arduino pelo JS
-var board = new five.Board(); // Conecte-se ao Arduino usando essa biblioteca
+var board = new five.Board(
+    {port: "COM3"}
+); // Conecte-se ao Arduino usando essa biblioteca
 
 board.on("ready", function() { // Quando o computador estiver conectado ao Arduino
     // Salva a referência para o pino LED e pino analógico
     var LEDpin = new five.Pin(13);
+    var servoCW = new five.Servo.Continuous(10);
     var analogPin = new five.Pin('A0');
     var app = express(); // E inicie esse servidor
     app.get('/', function(req, res) { // o que acontece quando vamos a `/`
@@ -40,6 +43,21 @@ board.on("ready", function() { // Quando o computador estiver conectado ao Ardui
         console.log("Alguém me disse para ligar o led ...");
         LEDpin.high(); // Defina o pino referido pela variável 'LEDpin` 'high'(ligado)
         res.send("Agora o LED do pino 13 deve estar ligado.") // E diga ao usuário que ele deve estar ligado na página da Web
+    });
+    app.get('/key/up', function(req, res) { // O que acontece quando alguém vai para `/led/on`
+        console.log("CW");
+        servoCW.cw(); // Servo move no sentido anti-horário
+        res.send("Servo move no sentido anti-horário") // Mostra na web o movimento do servo
+    });
+    app.get('/key/down', function(req, res) { // O que acontece quando alguém vai para `/led/on`
+        console.log("CCW");
+        servoCW.ccw(); // Servo move no sentido horário
+        res.send("Servo move no sentido horário") // Mostra na web o movimento do servo
+    });
+    app.get('/key/stop', function(req, res) { // O que acontece quando alguém vai para `/led/on`
+        console.log("Stopping");
+        servoCW.stop(); // Servo move para o meio
+        res.send("Servo move para o meio") // Mostra na web o movimento do servo
     });
     app.listen(3000, function() { // Ligue o servidor web na porta 3000
         console.log("Servidor em http://localhost:3000!");

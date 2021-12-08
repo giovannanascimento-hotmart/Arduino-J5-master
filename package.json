@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "express": "^4.16.3",
-    "johnny-five": "^2.1.0"
+    "johnny-five": "^2.1.0",
+    "keypress": "^0.2.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -17,5 +18,9 @@
     "start": "node server.js"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rbarros/Arduino-J5/issues"
+  },
+  "homepage": "https://github.com/rbarros/Arduino-J5#readme"
 }
