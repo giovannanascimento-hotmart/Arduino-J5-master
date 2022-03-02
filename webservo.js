@@ -60,6 +60,6 @@ board.on("ready", function() { // Quando o computador estiver conectado ao Ardui
         res.send("Servo move para o meio") // Mostra na web o movimento do servo
     });
     app.listen(3000, function() { // Ligue o servidor web na porta 3000
-        console.log("Servidor em http://localhost:3000!");
+        console.log("Servidor em http://localhost:3000!"); //Comentario teste
     });
 });
