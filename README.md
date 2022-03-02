@@ -4,7 +4,7 @@ Arduino com Johnny-Five com Node.js + Express
 Este é um pequeno projeto de exemplo que demonstra como usar o [johnny-five](http://johnny-five.io/) 
 (uma biblioteca [Node](https://nodejs.org/en/) que permite você programar em muitas
 plataformas - incluindo o [Arduino](https://www.arduino.cc/) e [Tessel](https://tessel.io/) - _via_ JavaScript) 
-em conjunto com [express](http://expressjs.com/) (outra biblioteca do Node que permite escrever um servidor web simples com JavaScript) para usar o Arduino como um servidor web.
+em conjunto com [express](http://expressjs.com/) (outra biblioteca do Node que permite escrever um servidor web simples com JavaScript) para usar o Arduino como um servidor web
 
 Para executar este projeto, precisamos fazer duas coisas:
 
